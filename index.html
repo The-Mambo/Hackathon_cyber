@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World's Largest Hackathon - Retro Computing Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./src/styles/main.scss">
+  <style>
+    /* CRT Effect Filter */
+    .crt-filter {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1000;
+      pointer-events: none;
+      opacity: 0.2;
+    }
+  </style>
+</head>
+<body>
+  <!-- CRT Filter -->
+  <div class="crt-filter">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%">
+      <defs>
+        <filter id="crt-effect" x="0" y="0">
+          <!-- Slightly offset color channels -->
+          <feColorMatrix type="matrix" result="color-offset"
+            values="1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0
+                    0 0 0 1 0" />
+          
+          <!-- Add slight blur -->
+          <feGaussianBlur stdDeviation="0.5" result="blur" />
+          
+          <!-- Add scanlines -->
+          <feTurbulence type="fractalNoise" baseFrequency="0.1 0.01" numOctaves="1" seed="1" result="noise" />
+          <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0" result="scanlines" />
+          
+          <!-- Blend all effects -->
+          <feBlend in="SourceGraphic" in2="blur" mode="normal" />
+          <feBlend in="SourceGraphic" in2="scanlines" mode="multiply" />
+        </filter>
+      </defs>
+      
+      <rect width="100%" height="100%" fill="transparent" filter="url(#crt-effect)" />
+    </svg>
+  </div>
+
+  <div class="loading-screen">
+    <div class="loading-text">BOOTING SYSTEM...</div>
+    <div class="loading-bar-container">
+      <div class="loading-bar"></div>
+    </div>
+  </div>
+
+  <canvas class="webgl"></canvas>
+
+  <main class="content">
+    <nav class="navbar">
+      <div class="logo">[WLH_2025]</div>
+      <div class="nav-links">
+        <a href="#about">ABOUT</a>
+        <a href="#details">DETAILS</a>
+        <a href="#sponsors">SPONSORS</a>
+        <a href="#host">HOST</a>
+        <a href="#judges">JUDGES</a>
+      </div>
+      <button class="menu-toggle">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <h1 class="title">WORLD'S LARGEST HACKATHON</h1>
+        <p class="tagline">OVER 100K PEOPLE BUILDING TOGETHER</p>
+        <div class="hero-cta">
+          <a href="https://form.typeform.com/to/wf94YwH4?typeform-source=t.co" target="_blank" class="cta-button glitch" data-text="REGISTER NOW">REGISTER NOW <span class="cursor">█</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="section-content">
+        <h2 class="section-title">ABOUT THE EVENT</h2>
+        <p class="section-text">Welcome to the ultimate hackathon powered by Bolt! Join coders, digital artists, vibe coders and visionaries from around the globe for an unprecedented hackathon experience. Push the boundaries of technology just like the pioneers of the digital age.</p>
+        <p class="section-text">CONNECT > COLLABORATE > CREATE > COMPUTE</p>
+      </div>
+    </section>
+
+    <section id="details" class="details">
+      <div class="section-content">
+        <h2 class="section-title">EVENT DETAILS</h2>
+        <div class="detail-cards">
+          <div class="details-card">
+            <h3>DATE// TBD</h3>
+            <p>COMPETITION BEGINS_</p>
+            <a href="https://form.typeform.com/to/wf94YwH4?typeform-source=t.co" target="_blank" class="cta-button">REGISTER</a>
+          </div>
+          <div class="details-card">
+            <h3>LOCATION// VIRTUAL SPACE</h3>
+            <p>JOIN FROM ANYWHERE_</p>
+          </div>
+          <div class="details-card">
+            <h3>PRIZE_POOL//</h3>
+            <p class="prize-amount">$1,000,000+</p>
+            <p class="prize-text">FORTUNE & GLORY_</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sponsors" class="sponsors">
+      <div class="section-content">
+        <h2 class="section-title">SYSTEM SPONSORS</h2>
+        <div class="sponsors-grid">
+          <div class="sponsor-card" data-content="SUPABASE">
+            <div class="image-wrapper">
+              <img src="/sponsors/supabase.jpg" alt="Supabase" class="sponsor-image" onerror="this.style.display='none'" />
+            </div>
+            <div class="sponsor-placeholder">@Supabase</div>
+          </div>
+          <div class="sponsor-card" data-content="NETLIFY">
+            <div class="image-wrapper">
+              <img src="/sponsors/netlify.jpg" alt="Netlify" class="sponsor-image" onerror="this.style.display='none'" />
+            </div>
+            <div class="sponsor-placeholder">@Netlify</div>
+          </div>
+          <div class="sponsor-card" data-content="CLOUDFLARE">
+            <div class="image-wrapper">
+              <img src="/sponsors/cloudflare.jpg" alt="Cloudflare" class="sponsor-image" onerror="this.style.display='none'" />
+            </div>
+            <div class="sponsor-placeholder">@CloudflareDev</div>
+          </div>
+          <div class="sponsor-card" data-content="SENTRY">
+            <div class="image-wrapper">
+              <img src="/sponsors/sentry.jpg" alt="Sentry" class="sponsor-image" onerror="this.style.display='none'" />
+            </div>
+            <div class="sponsor-placeholder">@GetSentry</div>
+          </div>
+          <div class="sponsor-card" data-content="LOOPS">
+            <div class="image-wrapper">
+              <img src="/sponsors/loops.jpg" alt="Loops" class="sponsor-image" onerror="this.style.display='none'" />
+            </div>
+            <div class="sponsor-placeholder">@Loops</div>
+          </div>
+          <div class="sponsor-card" data-content="ALGORAND">
+            <div class="image-wrapper">
+              <img src="/sponsors/algorand.jpg" alt="Algorand Foundation" class="sponsor-image" onerror="this.style.display='none'" />
+            </div>
+            <div class="sponsor-placeholder">@AlgoFoundation</div>
+          </div>
+          <div class="sponsor-card" data-content="EXA">
+            <div class="image-wrapper">
+              <img src="/sponsors/exa.jpg" alt="Exa AI Labs" class="sponsor-image" onerror="this.style.display='none'" />
+            </div>
+            <div class="sponsor-placeholder">@ExaAILabs</div>
+          </div>
+          <div class="sponsor-card" data-content="HACKERHOUSE">
+            <div class="image-wrapper">
+              <img src="/sponsors/hsr.jpg" alt="Hacker House" class="sponsor-image" onerror="this.style.display='none'" />
+            </div>
+            <div class="sponsor-placeholder">@hsrhackerhouse</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="host" class="host">
+      <div class="section-content">
+        <h2 class="section-title">EVENT HOST</h2>
+        <div class="host-container">
+          <div class="host-image">
+            <img src="/host/greg.jpg" alt="Greg Isenberg" onerror="this.style.display='none'" />
+          </div>
+          <div class="host-info">
+            <h3 class="host-name">Greg Isenberg</h3>
+            <p class="host-title">@gregisenberg</p>
+            <p class="host-bio">Visionary tech entrepreneur and community builder.</p>
+            <div class="host-cta">
+              <button class="cta-button glitch" data-text="CONNECT">CONNECT <span class="cursor">█</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="judges" class="judges">
+      <div class="section-content">
+        <h2 class="section-title">ADMIN PANEL</h2>
+        <div class="judges-grid">
+          <div class="judge-card">
+            <div class="judge-image">
+              <img src="/judges/pieter.jpg" alt="Pieter Levels" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'judge-placeholder\'></div>'" />
+            </div>
+            <h3 class="judge-name">Pieter Levels</h3>
+            <p class="judge-title">@levelsio</p>
+          </div>
+          <div class="judge-card">
+            <div class="judge-image">
+              <img src="/judges/logan.jpg" alt="Logan Kilpatrick" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'judge-placeholder\'></div>'" />
+            </div>
+            <h3 class="judge-name">Logan Kilpatrick</h3>
+            <p class="judge-title">@OfficialLoganK</p>
+          </div>
+          <div class="judge-card">
+            <div class="judge-image">
+              <img src="/judges/sarah.jpg" alt="Sarah Guo" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'judge-placeholder\'></div>'" />
+            </div>
+            <h3 class="judge-name">Sarah Guo</h3>
+            <p class="judge-title">@saranormous</p>
+          </div>
+          <div class="judge-card">
+            <div class="judge-image">
+              <img src="/judges/theo.jpg" alt="Theo" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'judge-placeholder\'></div>'" />
+            </div>
+            <h3 class="judge-name">Theo</h3>
+            <p class="judge-title">@theo</p>
+          </div>
+          <div class="judge-card">
+            <div class="judge-image">
+              <img src="/judges/evan.jpg" alt="Evan You" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'judge-placeholder\'></div>'" />
+            </div>
+            <h3 class="judge-name">Evan You</h3>
+            <p class="judge-title">@youyuxi</p>
+          </div>
+          <div class="judge-card">
+            <div class="judge-image">
+              <img src="/judges/kp.jpg" alt="KP" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'judge-placeholder\'></div>'" />
+            </div>
+            <h3 class="judge-name">KP</h3>
+            <p class="judge-title">@thisiskp_</p>
+          </div>
+          <div class="judge-card">
+            <div class="judge-image">
+              <img src="/judges/alex.jpg" alt="Alex Albert" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'judge-placeholder\'></div>'" />
+            </div>
+            <h3 class="judge-name">Alex Albert</h3>
+            <p class="judge-title">@alexalbert__</p>
+          </div>
+          <div class="judge-card">
+            <div class="judge-image">
+              <img src="/judges/ben.jpg" alt="Ben Tossell" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'judge-placeholder\'></div>'" />
+            </div>
+            <h3 class="judge-name">Ben Tossell</h3>
+            <p class="judge-title">@bentosell</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">[WLH_2025]</div>
+        <div class="footer-links">
+          <a href="#">SECURITY POLICY</a>
+          <a href="#">TERMS & CONDITIONS</a>
+          <a href="#">CONNECT</a>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link">IRC</a>
+          <a href="#" class="social-link">BBS</a>
+          <a href="#" class="social-link">USENET</a>
+        </div>
+        <p class="copyright">© 2025 WORLD'S LARGEST HACKATHON - ALL RIGHTS RESERVED - v1.0.1</p>
+      </div>
+    </footer>
+  </main>
+
+  <script type="module" src="./src/js/main.js"></script>
+</body>
+</html> 
