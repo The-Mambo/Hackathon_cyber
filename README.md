@@ -1,14 +1,14 @@
-# The World's Largest Hackathon Landing Page
+# The World's Largest Hackathon Landing Page - Retro Computing Edition
 
-A visually stunning, modern, and dynamic landing page for "The World's Largest Hackathon" featuring an impressive Three.js lightning animation.
+A visually stunning, retro-computing themed landing page for "The World's Largest Hackathon" featuring vintage CRT effects and a nostalgic 8-bit aesthetic.
 
 ## Features
 
-- Eye-catching Three.js lightning bolt animation that dynamically strikes on page load
-- Smooth scrolling and section animations
+- Authentic CRT screen effects with scan lines and color distortion
+- Retro computing aesthetic with pixel fonts and 8-bit design elements
 - Fully responsive design for all devices
 - Interactive elements with hover effects
-- Modern, futuristic aesthetic with electric blue theme
+- Nostalgic aesthetic with classic computing color palette
 
 ## Technologies Used
 
@@ -18,6 +18,7 @@ A visually stunning, modern, and dynamic landing page for "The World's Largest H
 - Three.js (for 3D animations)
 - GSAP (for smooth animations)
 - SplitType (for text animations)
+- Vite (for development and build)
 
 ## Getting Started
 
@@ -52,23 +53,25 @@ npm run dev
 /
 ├── index.html              # Main HTML file
 ├── package.json            # Project dependencies and scripts
+├── vite.config.js          # Vite configuration
 ├── public/                 # Public assets folder
 │   ├── host/               # Host/event branding images
 │   ├── judges/             # Judge profile images
 │   └── sponsors/           # Sponsor logo images
 ├── src/
+│   ├── assets/             # Additional assets
 │   ├── styles/
 │   │   └── main.scss       # Main stylesheet (SCSS)
 │   ├── js/
 │   │   ├── main.js         # Main JavaScript file
 │   │   └── lib/
-│   │       └── LightningEffect.js # Three.js lightning animation
+│   │       └── LightningEffect.js # Three.js animation effects
 ```
 
 ## Image Guidelines
 
 ### Sponsors
-Place sponsor logos in the `public/sponsors/` directory. Use transparent PNG files with white logos for best visibility against the dark background. See the README in that directory for specific filename requirements.
+Place sponsor logos in the `public/sponsors/` directory. Use transparent PNG files with logos that match the retro computing theme for best visibility. See the README in that directory for specific filename requirements.
 
 ### Judges
 Place judge profile images in the `public/judges/` directory. Use square aspect ratio images (1:1) with minimum dimensions of 300x300px. See the README in that directory for specific filename requirements.
